@@ -15,7 +15,11 @@ export class HomeComponent implements OnInit {
     //answers: Movie[];
 
     isDisplayed = false;
-    
+    //Questions Variables
+    questionFour: "";
+
+    //Answers Variables
+    answerFour: [];
 
     constructor(@Inject(AppConfig) public appConfig: any,
                 private movieService: MovieService
@@ -30,6 +34,21 @@ export class HomeComponent implements OnInit {
         }
     }
     showAllTasks() {
+        let task4 = this.movieService.getMoviesInfo('GetPlanetWithMoreVehiclePilots');
+
+        //Combine all requests and get combined results at the same time - assign the returned results into a variables
+        forkJoin([task4])
+        //.map((res: Response) => res.json().response.map((data: Movie) => new Movie().deserialize(data)))
+            .subscribe(([res4]) => {
+                var me = this;
+                //Get all results for each task/question and assign them to variables
+                me.questionFour = res4['question'];
+                me.answerFour = res4['answer'];
+            }, (error) => {
+                console.log('Error found!');
+            }, () => {
+                console.log('Request Complete!');
+            });
 
     }
 }
