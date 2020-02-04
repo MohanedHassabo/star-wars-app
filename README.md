@@ -1,20 +1,18 @@
 # Star Wars App
 
+Star Wars App is a simple Angular app as frontend comsumes backed API written in PHP.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
 
 
 
-## Development server
+## Installation & Development server
 
 First make sure you have node and npm packages installed in your system before running the following commands.
 
 Run command `npm install` in project root to add/update node_modules for the project.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
