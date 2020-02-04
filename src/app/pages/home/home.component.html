@@ -54,6 +54,16 @@
     </div>
 
     <br>
+    <div class="info-container" [hidden]="!isDisplayed">
+        <br>
+        <br>
+        <span class="question">{{questionTwo}}</span>
+        <ul>
+            <li *ngFor="let answer of answerTwo">
+                <span >{{answer.name}}</span>
+            </li>
+        </ul>
+    </div>
 
     <!-- Footer -->
     <footer>
