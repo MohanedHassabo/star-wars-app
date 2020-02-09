@@ -1,6 +1,6 @@
 # Star Wars App
 
-Star Wars App is a simple Angular app as frontend consumes backed API written in PHP.
+Star Wars App is a simple Angular app as frontend consumes backend API written in PHP.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
 
