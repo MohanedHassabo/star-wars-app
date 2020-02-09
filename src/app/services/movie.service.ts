@@ -1,40 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import { API_URL} from '../configs/app.config';
-import {Deserializable} from "../shared/models/deserializable.model";
-import {Observable} from 'rxjs';
+import { JsonResult, Result, DataAdapter} from '../shared/models/movie.model';
+import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-//Create Movie Data Model
-export class Movie implements Deserializable {
-    id: number;
-    name: string;
-    no_of_characters: number;
-    //no_of_film: number;
-    no_of_pilots: number;
-    pilots: string;
-    total: number;
-    deserialize(input: any) {
-        Object.assign(this, input);
-        return this;
-    }
-}
+export class Answer extends Result {}
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MovieService {
-    headers: any;
-    response = [];
-    constructor(private http: HttpClient) {}
 
-    //Http request call general function for all tasks need to be called in api
+    constructor(private http: HttpClient, private dataAdapter: DataAdapter) {}
+
+    // Http request call general function for all tasks need to be called to consumes our api.
     getMoviesInfo(task: string) {
         const options = {
-              withCredentials: true,
-              headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
-              params: new HttpParams().append('task', task)
+            withCredentials: true,
+            headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}),
+            params: new HttpParams().append('task', task)
         };
         return this.http.get(API_URL.urlMovies, options);
+    }
+
+    // Combine all requests to get combined results at the same time for each question.
+    getAllTasks(): Observable<JsonResult[]> {
+        const me = this;
+        return forkJoin(
+            me.getMoviesInfo('GetLongestOpeningCrawlMovie'),
+            me.getMoviesInfo('GetPersonAppearedInMostFilms'),
+            me.getMoviesInfo('GetSpeciesApearedInMostFilms'),
+            me.getMoviesInfo('GetPlanetWithMoreVehiclePilots')
+        ).pipe(
+            map((data: any[]) => data.map(item => this.dataAdapter.adapt(item)))
+        );
     }
 }

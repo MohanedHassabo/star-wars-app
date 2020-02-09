@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HomeComponent } from './home.component';
-import { AboutComponent} from "../about/about.component";
-import { PageNotFoundComponent} from "../page-not-found/page-not-found.component";
+import { AboutComponent} from '../about/about.component';
+import { PageNotFoundComponent} from '../page-not-found/page-not-found.component';
 
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { AppConfig, APP_CONFIG} from '../../configs/app.config';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('HomeComponent', () => {
     let component: HomeComponent;
     let fixture: ComponentFixture<HomeComponent>;
-    let router: Router;
+    // let router: Router;
 
-    /*let component: AboutComponent;
+    /* let component: AboutComponent;
     let fixture: ComponentFixture<AboutComponent>;*/
 
     beforeEach(async(() => {
@@ -21,7 +21,7 @@ describe('HomeComponent', () => {
             declarations: [HomeComponent, AboutComponent, PageNotFoundComponent
             ],
             imports: [
-                //RouterTestingModule
+                // RouterTestingModule
                 RouterTestingModule.withRoutes([
                     {path: 'home', component: HomeComponent},
                     {path: 'about', component: AboutComponent},
